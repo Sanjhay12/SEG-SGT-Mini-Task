@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block heading %}Delete request{% endblock %}
+
+{% block content %}
+<p class="text-muted">Request #{{ service_request.id }}</p>
+
+<form method="post">
+  {% csrf_token %}
+  <p>Are you sure you want to delete <strong>{{ service_request.title }}</strong>? This cannot be undone.</p>
+
+  <button class="btn btn-danger" type="submit">Delete</button>
+  <a class="btn btn-secondary" href="{% url 'view_request' service_request.pk %}">Cancel</a>
+</form>
+{% endblock %}

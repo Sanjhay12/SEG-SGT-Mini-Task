@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block heading %}Requests{% endblock %}
+
+{% block content %}
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for request in requests %}
+      <tr>
+        <td>{{ request.pk }}</td>
+        <td><a href="{% url 'view_request' request.pk %}">{{ request.title }}</a></td>
+        <td>{{ request.description|truncatechars:80 }}</td>
+        <td>
+          <a href="{% url 'view_request' request.pk %}" title="Show"><i class="bi bi-eye"></i></a>
+          <a href="{% url 'update_request' request.pk %}" title="Edit"><i class="bi bi-pencil"></i></a>
+          <a class="text-danger" href="{% url 'delete_request' request.pk %}" title="Delete"><i class="bi bi-trash"></i></a>
+        </td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="4">No requests yet.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<a class="btn btn-primary" href="{% url 'create_request' %}">New request</a>
+{% endblock %}

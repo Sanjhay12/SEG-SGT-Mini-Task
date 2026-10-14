@@ -1,0 +1,170 @@
+# ---------------------------------------------------------------------------
+# Virtual environments
+# ---------------------------------------------------------------------------
+venv/
+.venv/
+env/
+.env
+ENV/
+env.bak/
+venv.bak/
+.python-version
+
+# ---------------------------------------------------------------------------
+# Python generated files
+# ---------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Packaging and builds
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+wheels/
+pip-wheel-metadata/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Code coverage reports (`coverage run`, `coverage html`, `coverage xml`, etc.)
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+coverage.json
+coverage.lcov
+lcov.info
+*.cover
+
+# Test runners and type checkers
+.pytest_cache/
+.tox/
+.nox/
+.hypothesis/
+.mypy_cache/
+.pyre/
+.pytype/
+.ruff_cache/
+.dmypy.json
+dmypy.json
+
+# Jupyter and IPython
+.ipynb_checkpoints/
+profile_default/
+ipython_config.py
+
+# ---------------------------------------------------------------------------
+# Django generated files
+# ---------------------------------------------------------------------------
+# Local development database
+db.sqlite3
+db.sqlite3-journal
+*.sqlite3
+
+# Logs
+*.log
+
+# Output of `manage.py collectstatic`, and uploaded files
+staticfiles/
+media/
+
+# Local settings and secrets
+.env.*
+!.env.example
+local_settings.py
+
+# ---------------------------------------------------------------------------
+# Operating systems
+# ---------------------------------------------------------------------------
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+.fseventsd
+.TemporaryItems
+.VolumeIcon.icns
+.DocumentRevisions-V100
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ---------------------------------------------------------------------------
+# Editors and IDEs
+# ---------------------------------------------------------------------------
+# Visual Studio Code (keep shared settings if you choose to commit them)
+.vscode/*
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/
+*.code-workspace
+
+# JetBrains (PyCharm, IntelliJ IDEA, etc.)
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Cursor and other VS Code-based editors
+.cursor/
+
+# Vim
+*.swp
+*.swo
+*.swn
+[._]*.un~
+Session.vim
+Sessionx.vim
+tags
+
+# Emacs
+\#*\#
+.\#*
+*.elc
+auto-save-list/
+.projectile
+.dir-locals.el
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Spyder
+.spyderproject
+.spyproject
+
+# Eclipse / PyDev
+.project
+.pydevproject
+.settings/
+.metadata/
+
+# Zed
+.zed/
+
+# NetBeans
+nbproject/
+
+# Visual Studio
+.vs/

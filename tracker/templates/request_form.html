@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block heading %}
+  {% if service_request %}Edit request{% else %}New request{% endif %}
+{% endblock %}
+
+{% block content %}
+{% if service_request %}
+  <p class="text-muted">Request #{{ service_request.id }}</p>
+{% endif %}
+
+<form method="post" novalidate>
+  {% csrf_token %}
+  {% for field in form %}
+    <div class="mb-3">
+      {{ field.label_tag }}
+      {{ field }}
+      <div class="text-danger">{{ field.errors }}</div>
+    </div>
+  {% endfor %}
+
+  <button class="btn btn-primary" type="submit">Save</button>
+  <a class="btn btn-secondary" href="{% url 'list_request' %}">Cancel</a>
+</form>
+{% endblock %}

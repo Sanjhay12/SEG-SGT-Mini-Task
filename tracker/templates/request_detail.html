@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block heading %}{{ service_request.title }}{% endblock %}
+
+{% block content %}
+<p class="text-muted">Request #{{ service_request.id }}</p>
+
+<p>{{ service_request.description|linebreaksbr|default:"No description." }}</p>
+
+<a class="btn btn-primary" href="{% url 'update_request' service_request.pk %}">Edit</a>
+<a class="btn btn-danger" href="{% url 'delete_request' service_request.pk %}">Delete</a>
+<a class="btn btn-secondary" href="{% url 'list_request' %}">Back to list</a>
+{% endblock %}
