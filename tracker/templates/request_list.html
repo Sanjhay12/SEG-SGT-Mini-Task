@@ -3,32 +3,53 @@
 {% block heading %}Requests{% endblock %}
 
 {% block content %}
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Title</th>
-      <th>Description</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for request in requests %}
+
+<form method="post" action="{% url 'bulk_delete_request' %}"
+      onsubmit="return confirm('Delete the selected requests?')">
+  {% csrf_token %}
+
+  <table class="table table-hover">
+    <thead>
       <tr>
-        <td>{{ request.pk }}</td>
-        <td><a href="{% url 'view_request' request.pk %}">{{ request.title }}</a></td>
-        <td>{{ request.description|truncatechars:80 }}</td>
-        <td>
-          <a href="{% url 'view_request' request.pk %}" title="Show"><i class="bi bi-eye"></i></a>
-          <a href="{% url 'update_request' request.pk %}" title="Edit"><i class="bi bi-pencil"></i></a>
-          <a class="text-danger" href="{% url 'delete_request' request.pk %}" title="Delete"><i class="bi bi-trash"></i></a>
-        </td>
+        
+        <th><input type="checkbox" id="select-all" class="form-check-input"></th>
+        <th>#</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th></th>
       </tr>
-    {% empty %}
-      <tr><td colspan="4">No requests yet.</td></tr>
-    {% endfor %}
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      {% for request in requests %}
+        <tr>
+      
+          <td>
+            <input type="checkbox" name="selected" value="{{ request.pk }}"
+                   class="form-check-input row-checkbox">
+          </td>
+          <td>{{ request.pk }}</td>
+          <td><a href="{% url 'view_request' request.pk %}">{{ request.title }}</a></td>
+          <td>{{ request.description|truncatechars:80 }}</td>
+          <td>
+            <a href="{% url 'view_request' request.pk %}" title="Show"><i class="bi bi-eye"></i></a>
+            <a href="{% url 'update_request' request.pk %}" title="Edit"><i class="bi bi-pencil"></i></a>
+            <a class="text-danger" href="{% url 'delete_request' request.pk %}" title="Delete"><i class="bi bi-trash"></i></a>
+          </td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="5">No requests yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <button type="submit" class="btn btn-danger">Delete selected</button>
+</form>
 
 <a class="btn btn-primary" href="{% url 'create_request' %}">New request</a>
+
+<script>
+  document.getElementById("select-all").addEventListener("change", function () {
+    document.querySelectorAll(".row-checkbox").forEach(cb => cb.checked = this.checked);
+  });
+</script>
 {% endblock %}
