@@ -37,3 +37,8 @@ def delete_request(request, pk):
         return redirect('list_request')
     return render(request, 'request_confirm_delete.html', {'service_request': service_request})
 
+def bulk_delete_request(request):
+    ids = request.POST.getlist("selected")
+    Request.objects.filter(id__in=ids).delete()
+    return redirect('list_request')
+
