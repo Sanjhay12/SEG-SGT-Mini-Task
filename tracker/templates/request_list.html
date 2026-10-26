@@ -3,6 +3,15 @@
 {% block heading %}Requests{% endblock %}
 
 {% block content %}
+
+<select id= "sort-select" name="sort" aria-placeholder="Sort by">
+  <option value="" selected disabled hidden>Sort by</option>
+  <option value="title_ASC"> Title(A-Z)</option>
+  <option value="title_DESC">Title(Z-A)</option>
+  <option value="id_ASC"> Id#</option>
+</select>
+
+
 <table class="table table-hover">
   <thead>
     <tr>
@@ -12,7 +21,7 @@
       <th></th>
     </tr>
   </thead>
-  <tbody>
+  <tbody id="request-rows">
     {% for request in requests %}
       <tr>
         <td>{{ request.pk }}</td>
@@ -29,6 +38,24 @@
     {% endfor %}
   </tbody>
 </table>
+
+<script>
+  const select = document.getElementById("sort-select");
+  select.addEventListener("change", async() =>{
+    const url = "?sort=" + select.value;
+
+    const response = await fetch(url);
+    const html = await response.text();
+
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    const newRows = doc.getElementById("request-rows");
+    document.getElementById("request-rows").innerHTML = newRows.innerHTML;
+  
+  });
+    
+
+
+</script>
 
 <a class="btn btn-primary" href="{% url 'create_request' %}">New request</a>
 {% endblock %}
