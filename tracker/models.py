@@ -3,6 +3,7 @@ from django.db import models
 
 class Request(models.Model):
     title = models.CharField(max_length=200)
+    priority = models.BooleanField(default=False)
     description = models.TextField(blank=True)
 
     class Meta:
