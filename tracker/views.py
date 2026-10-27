@@ -5,7 +5,15 @@ from .models import Request
 
 
 def list_request(request):
-    return render(request, 'request_list.html', {'requests': Request.objects.all()})
+    sort = request.GET.get('sort')
+    qs = Request.objects.all()
+    if request.GET.get('priority') == '1':
+        qs = qs.filter(priority=True)
+    return render(request, 'request_list.html', {
+        'requests': qs,
+        'sort': sort,
+        'priority_filter': request.GET.get('priority') == '1',
+    })
 
 
 def view_request(request, pk):

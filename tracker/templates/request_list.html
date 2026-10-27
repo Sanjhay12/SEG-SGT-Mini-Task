@@ -8,6 +8,7 @@
     <tr>
       <th>#</th>
       <th>Title</th>
+      <th><a href="?priority=1" style="color: inherit;">Priority</a></th>
       <th>Description</th>
       <th></th>
     </tr>
@@ -17,6 +18,7 @@
       <tr>
         <td>{{ request.pk }}</td>
         <td><a href="{% url 'view_request' request.pk %}">{{ request.title }}</a></td>
+        <td>{% if request.priority %}★{% endif %}</td>
         <td>{{ request.description|truncatechars:80 }}</td>
         <td>
           <a href="{% url 'view_request' request.pk %}" title="Show"><i class="bi bi-eye"></i></a>
@@ -27,6 +29,9 @@
     {% empty %}
       <tr><td colspan="4">No requests yet.</td></tr>
     {% endfor %}
+    {% if priority_filter %}
+      <p><a href="{% url 'list_request' %}">Show all requests</a></p>
+    {% endif %}
   </tbody>
 </table>
 
