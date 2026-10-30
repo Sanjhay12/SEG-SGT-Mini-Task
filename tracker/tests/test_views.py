@@ -18,6 +18,26 @@ class ListRequestTests(TestCase):
         response = self.client.get(reverse('list_request'))
         self.assertContains(response, 'No requests yet.')
 
+    def test_priority_filter_shows_only_priority_requests(self):
+        Request.objects.create(title='Urgent leak', priority=True)
+        Request.objects.create(title='Routine repair', priority=False)
+
+        response = self.client.get(reverse('list_request'), {'priority': '1'})
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Urgent leak')
+        self.assertNotContains(response, 'Routine repair')
+        self.assertContains(response, 'Show all requests')
+        self.assertTrue(response.context['priority_filter'])
+
+    def test_priority_filter_shows_empty_message_when_no_priority_requests(self):
+        Request.objects.create(title='Routine repair', priority=False)
+
+        response = self.client.get(reverse('list_request'), {'priority': '1'})
+
+        self.assertContains(response, 'No priority requests found.')
+        self.assertNotContains(response, 'Routine repair')
+
 
 class ViewRequestTests(TestCase):
     def test_shows_request(self):
